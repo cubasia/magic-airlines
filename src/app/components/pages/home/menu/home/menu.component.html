@@ -1,1 +1,22 @@
-<p>Sono la pagina iniziale</p>
+<section class="product">
+  <div class="container py-5 ">
+    <div class="row py-5 m-auto text-center">
+      <h1>What's Trending</h1>
+      <h6>Be Healthy Organic Food</h6>
+      <div class="col-lg-3 text-center" *ngFor="let prodotto of prodotti">
+        <div class="card border-0 bg-light mb-2">
+          <div class="card-body">
+            <img [src]="prodotto.image" class="img-fluid" alt="">
+          </div>
+        </div>
+        <h6>{{prodotto.description}}</h6>
+        <p>${{prodotto.price}}</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 text-center m-auto">
+          <button class="btn1">Click For More</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

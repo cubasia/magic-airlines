@@ -1,0 +1,31 @@
+.product h6 {
+  color: red;
+  font-family: 'Rubik', sans-serif;
+}
+
+h1 {
+  font-weight: 700;
+}
+
+.btn1 {
+  height: 45px;
+  width: 35%;
+  border: none;
+  outline: none;
+  background-color: rgb(248, 26, 92);
+  color: white;
+  font-weight: 700;
+  border-radius: 60px;
+}
+
+.btn1:hover {
+  background-color: rgb(233, 15, 77);
+  transition: 0.5s
+}
+
+.card:hover {
+  box-shadow: -2px -1px 25px -4px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -2px -1px 25px -4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -2px -1px 25px -4px rgba(0, 0, 0, 0.75);
+  transition: 0.35s;
+}
