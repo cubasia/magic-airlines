@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeContainerComponent } from './components/pages/home/home-container/home-container.component';
 import { HeaderComponent } from './components/pages/home/header/header/header.component';
 import { FooterComponent } from './components/pages/home/footer/footer/footer.component';
-import { MenuComponent } from './components/pages/home/menu/menu/menu.component';
+import { MenuComponent } from './components/pages/home/menu/home/menu.component';
 
 
 @NgModule({

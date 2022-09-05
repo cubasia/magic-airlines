@@ -24,7 +24,8 @@
     ]
   },
   "paths": {
-   "@services":["./src/app/services"]
+   "@services/":["app/services/*"],
+   "@services":["app/services/index.ts"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
