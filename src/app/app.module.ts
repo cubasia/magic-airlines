@@ -7,21 +7,21 @@ import { HomeContainerComponent } from './components/pages/home/home-container/h
 import { HeaderComponent } from './components/pages/home/header/header/header.component';
 import { FooterComponent } from './components/pages/home/footer/footer/footer.component';
 import { MenuComponent } from './components/pages/home/menu/home/menu.component';
-
-
+import { ContactComponent } from './components/pages/home/contact/contact.component';
+import {DynamicDateInputDirective} from './directives/DynamycDateInputDirective'
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     HomeContainerComponent,
     HeaderComponent,
     FooterComponent,
-    MenuComponent
+    MenuComponent,
+    ContactComponent,
+    DynamicDateInputDirective,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule,ReactiveFormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

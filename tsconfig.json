@@ -2,7 +2,15 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "src",
+    "paths": {
+      "@services/*": ["app/services/*", "app/services"],
+      "@services": ["app/services/index.ts"],
+      "@components/*": ["app/components/*", "app/components"],
+      "@components": ["app/components/index.ts"],
+      "@models/*": ["app/models/*", "app/models"],
+      "@models": ["app/models/index.ts"]
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -22,10 +30,6 @@
       "es2020",
       "dom"
     ]
-  },
-  "paths": {
-   "@services/":["app/services/*"],
-   "@services":["app/services/index.ts"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

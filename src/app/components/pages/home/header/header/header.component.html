@@ -55,12 +55,16 @@
   </div>
   <div class="container" >
   <div class="d-flex bg-white " style="height: 3em;" >
-    <label for="dal">DA</label>
-    <input type="text" id="dal">
-    <label for="al">A</label>
-    <input type="text" id="al">
-    <label for="dald">DAL</label>
-    <input type="date" id="dald">
+    <form [formGroup]="bookingFormGroup" (ngSubmit)="onSubmit()" >
+
+    <input type="text" name="da" formControlName="da" class="form-control bg-light" placeholder="Da" >
+    <input type="text" name="a" formControlName="a" class="form-control bg-light" placeholder="A" >
+    <input type="text" name="partenza" formControlName="partenza" dynamic-date-inpu id="partenza" class="form-control bg-light" placeholder="enter the date here" >
+    <input type="text" name="arrivo" formControlName="arrivo"dynamic-date-input class="form-control bg-light" placeholder="enter the date here" >
+    <button type="submit" class ="btn btn-lg"><i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
     </div>
+
   </div>;
 </section>
