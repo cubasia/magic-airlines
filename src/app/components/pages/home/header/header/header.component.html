@@ -53,18 +53,27 @@
       </div>
     </nav>
   </div>
-  <div class="container" >
-  <div class="d-flex bg-white " style="height: 3em;" >
+
+    <!-- <h1>{{'maurizio' | uppercase }} </h1> -->
     <form [formGroup]="bookingFormGroup" (ngSubmit)="onSubmit()" >
-
-    <input type="text" name="da" formControlName="da" class="form-control bg-light" placeholder="Da" >
-    <input type="text" name="a" formControlName="a" class="form-control bg-light" placeholder="A" >
-    <input type="text" name="partenza" formControlName="partenza" dynamic-date-inpu id="partenza" class="form-control bg-light" placeholder="enter the date here" >
-    <input type="text" name="arrivo" formControlName="arrivo"dynamic-date-input class="form-control bg-light" placeholder="enter the date here" >
-    <button type="submit" class ="btn btn-lg"><i class="fa-solid fa-magnifying-glass"></i>
+    <div class="container d-flex my-5" style="height: 3em;" >
+    <!-- <input type="text" name="da" formControlName="da" class="form-control bg-light" placeholder="Da" > -->
+    <select name="da" formControlName="da" class="select form-control bg-light" placeholder="Da">
+      <option [ngValue]="null" disabled>Parto da</option>
+      <option *ngFor="let destinazione of destinazioni" [ngValue]="destinazione.id">{{destinazione.descrizione}}</option>
+    </select>
+    <select name="a" formControlName="a" class="form-control bg-light" placeholder="Da">
+      <option [ngValue]="null" disabled>Arrivo a</option>
+      <option *ngFor="let destinazione of arrivi" [ngValue]="destinazione.id">{{destinazione.descrizione}}</option>
+    </select>
+    <!-- <input type="text" name="a" formControlName="a" class="form-control bg-light" placeholder="A" > -->
+    <input type="text" name="partenza" formControlName="partenza" dynamic-date-input id="partenza" class="form-control bg-light" placeholder="enter the date here" >
+    
+    <input type="text" name="arrivo" formControlName="arrivo" dynamic-date-input class="form-control bg-light" placeholder="enter the date here" >
+    <button type="submit" class ="btn btn-lg border"><i class="fa-solid fa-magnifying-glass"></i>
       </button>
-    </form>
-    </div>
 
-  </div>;
+    </div>
+   </form>
+
 </section>
