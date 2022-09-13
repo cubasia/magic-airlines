@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MenuComponent } from './components/pages/home/menu/home/menu.component'
-import { FooterComponent } from './components/pages/home/footer/footer/footer.component'
+import { ResultsComponent } from './components/pages/results/results.component';
 const routes: Routes = [
   { path: 'home', component: MenuComponent },
-  { path: 'course', component: FooterComponent },
+  { title:"Risultato",path: 'results', component: ResultsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: MenuComponent },
 ];

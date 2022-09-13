@@ -11,7 +11,7 @@
     </div>
   </div>
 </section>
-<section class="header" id="">
+<section class="header" id="pippo">
   <div class="container-fluid p-0">
     <nav class="navbar navbar-expand-lg">
       <a class="navbar-brand" href="#">
@@ -21,15 +21,16 @@
         <i class="fas fa-align-right text-light"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <div class="mr-auto"></div>
-        <ul class="navbar-nav">
+        <div class="mr-auto" ></div>
+        <ul class="navbar-nav" >
           <li class="nav-item active">
             <a class="nav-link" [routerLink]="['home']">HOME
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['course']">COURSE</a>
+            <a class="nav-link" [routerLink]="['course']">
+              COURSE</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">PRICE</a>
@@ -58,20 +59,28 @@
     <form [formGroup]="bookingFormGroup" (ngSubmit)="onSubmit()" >
     <div class="container d-flex my-5" style="height: 3em;" >
     <!-- <input type="text" name="da" formControlName="da" class="form-control bg-light" placeholder="Da" > -->
-    <select name="da" formControlName="da" class="select form-control bg-light" placeholder="Da">
+    <!-- <span ng-show="submittedForm.contry.$error.required && co_form.contry.$error.required"
+      class="label label-danger">Indicanos tu país</span> -->
+    <select #PartoDaQui name="da" formControlName="da" class="select form-control bg-light" placeholder="Da">
       <option [ngValue]="null" disabled>Parto da</option>
-      <option *ngFor="let destinazione of destinazioni" [ngValue]="destinazione.id">{{destinazione.descrizione}}</option>
+      <option *ngFor="let destinazione of destinazioni" [ngValue]="destinazione">{{destinazione.descrizione}}</option>
     </select>
-    <select name="a" formControlName="a" class="form-control bg-light" placeholder="Da">
+    <select name="a" formControlName="a"   class="form-control bg-light" placeholder="Da">
       <option [ngValue]="null" disabled>Arrivo a</option>
-      <option *ngFor="let destinazione of arrivi" [ngValue]="destinazione.id">{{destinazione.descrizione}}</option>
+      <option *ngFor="let destinazione of arrivi" [ngValue]="destinazione">{{destinazione.descrizione}}</option>
     </select>
     <!-- <input type="text" name="a" formControlName="a" class="form-control bg-light" placeholder="A" > -->
-    <input type="text" name="partenza" formControlName="partenza" dynamic-date-input id="partenza" class="form-control bg-light" placeholder="enter the date here" >
-    
-    <input type="text" name="arrivo" formControlName="arrivo" dynamic-date-input class="form-control bg-light" placeholder="enter the date here" >
+    <input  type="text" name="partenza" formControlName="partenza"
+    min="{{today | date:'yyyy-MM-dd'}}" required
+    dynamic-date-input id="partenza" class="form-control bg-light" placeholder="enter the date here" >
+
+    <input type="text" name="arrivo" required formControlName="arrivo" dynamic-date-input class="form-control bg-light"
+     placeholder="enter the date here" min="{{minRitorno | date:'yyyy-MM-dd'}}">
+
     <button type="submit" class ="btn btn-lg border"><i class="fa-solid fa-magnifying-glass"></i>
       </button>
+
+
 
     </div>
    </form>

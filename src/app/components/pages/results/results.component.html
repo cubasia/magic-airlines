@@ -1,0 +1,15 @@
+<div class="container-fluid p-5 m-auto" *ngIf="da">
+
+
+  <table class="table table-success table-striped">
+    <tr>
+      <td>{{da.descrizione}}</td>
+      <td>{{a.descrizione}}</td>
+      <td>{{dal}}</td>
+      <td>{{al}}</td>
+    </tr>
+  </table>
+  <div class="container-fluid p-5 m-auto">
+      <app-details *ngFor="let rotta of rotte"></app-details>
+  </div>
+</div>
