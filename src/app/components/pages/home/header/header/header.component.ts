@@ -9,6 +9,7 @@ import {GetDestinationService} from '@services'
 import {RoutesmanagerserviceService} from '@services'
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { IParametertype } from '@models/interfParameters';
 
 @Component({
   selector: 'app-header',
@@ -62,7 +63,7 @@ sub = this.bookingFormGroup
       .get('da')
       ?.valueChanges.pipe(takeUntil(this.unsubscribe$))
   .subscribe((value) => {
-        
+
         this.arrivi = this.destinazioni.filter((a) => a.id != value.id);
       });
 
@@ -81,25 +82,12 @@ sub = this.bookingFormGroup
   }
 
   ngAfterViewInit(): void {
-    //   this._PartoDaQui.nativeElement.focus()
-    //  this._PartoDaQui.nativeElement.click();
-    // var event = new MouseEvent('MouseDown', {
-    //   view: window,
-    //   bubbles: true,
-    //   cancelable: true,
-    // });
-    // // //  this._PartoDaQui.nativeElement.size = 20;
-    // // this._PartoDaQui.nativeElement.dispatchEvent(event);
-    // // setTimeout(() => this._PartoDaQui.nativeElement.focus(), 4000);
-    // // setTimeout(() => this._PartoDaQui.nativeElement.click(), 4000);
-    // setTimeout(() => this._PartoDaQui.nativeElement.dispatchEvent(event), 4000);
+
   }
   ngAfterViewChecked(): void {
 
   }
   ngOnInit(): void {
-
-
 
   }
 
@@ -108,26 +96,24 @@ sub = this.bookingFormGroup
     // console.log(this.bookingFormGroup.value.da);
     //  console.log(typeof this.bookingFormGroup.value.partenza);
     // console.log(this.bookingFormGroup.value.arrivo);
+    let _tmpParemeters: IParametertype = {
+      da: this.bookingFormGroup.value.da,
+      a: this.bookingFormGroup.value.a,
+      dal: new Date(this.bookingFormGroup.value.partenza),
+      al: new Date(this.bookingFormGroup.value.arrivo)
+    };
     this.routesmanager.setparameters(
-      this.bookingFormGroup.value.da,
-      this.bookingFormGroup.value.a,
-      new Date(this.bookingFormGroup.value.partenza),
-      new Date(this.bookingFormGroup.value.arrivo)
-
+      _tmpParemeters
     );
     let Routes = this.routesmanager.searchRoutes(
-      this.bookingFormGroup.value.da,
-      this.bookingFormGroup.value.a,
-      new Date(this.bookingFormGroup.value.partenza),
-      new Date(this.bookingFormGroup.value.arrivo)
+      _tmpParemeters
     );
 
-    this.routesmanager.setResults(Routes);
-    this.router.navigate(['results']);
+       this.router.navigate(['results']);
   }
   ngOnDestroy() {
-    // this.unsubscribe$.next();
-    // this.unsubscribe$.complete();
+     this.unsubscribe$.next();
+     this.unsubscribe$.complete();
   }
 
   DateValidator(): ValidatorFn {

@@ -1,12 +1,12 @@
-<div class="container-fluid p-5 m-auto" *ngIf="da">
+<div class="container-fluid p-5 m-auto" *ngIf="Myparameters?.da">
 
 
   <table class="table table-success table-striped">
     <tr>
-      <td>{{da.descrizione}}</td>
-      <td>{{a.descrizione}}</td>
-      <td>{{dal}}</td>
-      <td>{{al}}</td>
+      <td>{{Myparameters!.da.descrizione}}</td>
+      <td>{{Myparameters!.a.descrizione}}</td>
+      <td>{{Myparameters!.dal}}</td>
+      <td>{{Myparameters!.al}}</td>
     </tr>
   </table>
   <div class="container-fluid p-5 m-auto">

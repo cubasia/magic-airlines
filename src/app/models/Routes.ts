@@ -43,6 +43,6 @@ export const RotteAeree: AirRoutes[] = [
     arrivo: { id: '5', descrizione: 'England' },
     partoDal: new Date('10/1/22'),
     arrivoIl: new Date('10/2/22'),
-  },
+  }
 ];
 

@@ -2,63 +2,56 @@ import { Injectable } from '@angular/core';
 import { AirRoutes } from '@models/Routes';
 import { RotteAeree } from '@models/Routes';
 import { destinazione  } from '@models/interfDestinazione';
-
+import { BehaviorSubject, Observable } from 'rxjs';
+import {
+  IParameter,IParametertype
+} from '@models/interfParameters';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RoutesmanagerserviceService {
+  private results: AirRoutes[] = [];
+  private routesSubject = new BehaviorSubject<AirRoutes[]>(this.results);
 
+  private parameterSubject = new BehaviorSubject<IParametertype>(null);
 
-  private da!: destinazione;
-  private a!: destinazione;
-  private dal!: Date;
-  private al!: Date;
+  constructor() {}
 
+  setparameters(parameters: IParametertype) : void {
 
-  private results:AirRoutes[] = [];
-
-  constructor() { }
-
-  setparameters(da: destinazione, a: destinazione, dal: Date, al: Date): void {
-    this.da = da;
-    this.a = a;
-    this.dal = dal;
-    this.al = al;
-
+    // this.myParameters!.da = parameters!.da;
+    // this.myParameters!.a = parameters!.a;
+    // this.myParameters!.dal = parameters!.dal;
+    // this.myParameters!.al = parameters!.al;
+    this.parameterSubject.next(parameters);
   }
 
-  getparameters()  {
-    return {
-  "da":this.da ,
-  "a":this.a,
-  "dal": this.dal,
-  "al": this.al
-}  }
-
-  setResults(results: AirRoutes[]): void {
-    this.results =[...results];
+  get Parameters() {
+    return this.parameterSubject.asObservable()
   }
-  getResults(): AirRoutes[] {
-    return this.results;
-  }
-  searchRoutes(partenza: destinazione, arrivo: destinazione, dal: Date, al: Date) {
 
+  get Rotte(): Observable<AirRoutes[]> {
+    return this.routesSubject.asObservable();
+  }
+  searchRoutes(
+    parameters: IParametertype
+  ) {
     // console.log(partenza.id,arrivo.id,dal,al)
 
-    let res = RotteAeree.filter(Rotta => {
-      Rotta.partoDal.setHours(0, 0, 0, 0)
-      Rotta.arrivoIl.setHours(0, 0, 0, 0)
-      dal.setHours(0, 0, 0, 0);
-      al.setHours(0, 0, 0, 0)
+    let res = RotteAeree.filter((Rotta) => {
+      Rotta.partoDal.setHours(0, 0, 0, 0);
+      Rotta.arrivoIl.setHours(0, 0, 0, 0);
+      parameters!.dal.setHours(0, 0, 0, 0);
+      parameters!.al.setHours(0, 0, 0, 0);
       // console.log(Rotta.partoDal, Rotta.arrivoIl);
-      return Rotta.partenza.id == partenza.id &&
-      Rotta.arrivo.id == arrivo.id &&
-      Rotta.partoDal.getTime() >= dal.getTime() &&
-      Rotta.arrivoIl.getTime() == al.getTime()
-    })
+      return (
+        Rotta.partenza.id == parameters!.da.id &&
+        Rotta.arrivo.id == parameters!.a.id &&
+        Rotta.partoDal.getTime() >= parameters!.dal.getTime() &&
+        Rotta.arrivoIl.getTime() == parameters!.al.getTime()
+      );
+    });
     // console.log(res.length)
-    return res
+    this.routesSubject.next(res);
   }
-
-
 }
