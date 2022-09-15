@@ -19,10 +19,6 @@ export class RoutesmanagerserviceService {
 
   setparameters(parameters: IParametertype) : void {
 
-    // this.myParameters!.da = parameters!.da;
-    // this.myParameters!.a = parameters!.a;
-    // this.myParameters!.dal = parameters!.dal;
-    // this.myParameters!.al = parameters!.al;
     this.parameterSubject.next(parameters);
   }
 

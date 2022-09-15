@@ -17,7 +17,7 @@ import { IParametertype } from '@models/interfParameters';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent
-  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked
+  implements OnInit, OnDestroy
 {
   @ViewChild('PartoDaQui')
   _PartoDaQui!: ElementRef;
@@ -30,90 +30,81 @@ export class HeaderComponent
 
   today = this.dataOdierna();
   unsubscribe$: Subject<void> = new Subject<void>();
-  destinazioni: destinazione[] = this.serviceDestinazione.getDestinazioni();
-  arrivi = [...this.destinazioni];
+  // destinazioni: destinazione[] = this.serviceDestinazione.getDestinazioni();
+  // arrivi = [...this.destinazioni];
+   destinazioni: destinazione[] = []
+  arrivi: destinazione[] = [];
   minRitorno = this.dataOdierna();
- bookingFormGroup!:FormGroup
-  gino= this.bookingFormGroup = this.fb.group({
-      da: [
-        '',
-        {
-          validators: [Validators.required],
-        },
-      ],
-      a: [
-        '',
-        {
-          validators: [Validators.required],
-        },
-      ],
-      partenza: new FormControl<Date | null>(null, {
-        validators: [Validators.required, this.DateValidator()],
-        // Validators.min(minDate)]
-      }),
-      arrivo: new FormControl<Date | null>(null, {
+  bookingFormGroup!: FormGroup;
+  gino = (this.bookingFormGroup = this.fb.group({
+    da: [
+      '',
+      {
         validators: [Validators.required],
-      }),
-    });
+      },
+    ],
+    a: [
+      '',
+      {
+        validators: [Validators.required],
+      },
+    ],
+    partenza: new FormControl<Date | null>(null, {
+      validators: [Validators.required, this.DateValidator()],
+      // Validators.min(minDate)]
+    }),
+    arrivo: new FormControl<Date | null>(null, {
+      validators: [Validators.required],
+    }),
+  }));
 
   get partenza() {
     return this.bookingFormGroup.controls['partenza'];
   }
-sub = this.bookingFormGroup
-      .get('da')
-      ?.valueChanges.pipe(takeUntil(this.unsubscribe$))
-  .subscribe((value) => {
+  sub = this.bookingFormGroup
+    .get('da')
+    ?.valueChanges.pipe(takeUntil(this.unsubscribe$))
+    .subscribe((value) => {
+      this.arrivi = this.destinazioni.filter((a) => a.id != value.id);
+    });
 
-        this.arrivi = this.destinazioni.filter((a) => a.id != value.id);
-      });
-
-     temsub = this.bookingFormGroup
-      .get('partenza')
-      ?.valueChanges.pipe(takeUntil(this.unsubscribe$))
-      .subscribe((value) => {
-        this.minRitorno = value;
-        if (this.bookingFormGroup.value.arrivo < value) {
-          this.bookingFormGroup.get('arrivo')?.reset();
-        }
-      });
+  temsub = this.bookingFormGroup
+    .get('partenza')
+    ?.valueChanges.pipe(takeUntil(this.unsubscribe$))
+    .subscribe((value) => {
+      this.minRitorno = value;
+      if (this.bookingFormGroup.value.arrivo < value) {
+        this.bookingFormGroup.get('arrivo')?.reset();
+      }
+    });
 
   dataOdierna(): string {
     return new Date().toISOString().slice(0, 10);
   }
 
-  ngAfterViewInit(): void {
-
-  }
-  ngAfterViewChecked(): void {
-
-  }
   ngOnInit(): void {
-
+    this.serviceDestinazione.getDestinazioni().subscribe(data => {
+      this.destinazioni = data
+      this.arrivi=data
+    })
   }
 
   onSubmit(): void {
-    // console.log(this.bookingFormGroup.value.a);
-    // console.log(this.bookingFormGroup.value.da);
-    //  console.log(typeof this.bookingFormGroup.value.partenza);
-    // console.log(this.bookingFormGroup.value.arrivo);
+
     let _tmpParemeters: IParametertype = {
       da: this.bookingFormGroup.value.da,
       a: this.bookingFormGroup.value.a,
       dal: new Date(this.bookingFormGroup.value.partenza),
-      al: new Date(this.bookingFormGroup.value.arrivo)
+      al: new Date(this.bookingFormGroup.value.arrivo),
     };
-    this.routesmanager.setparameters(
-      _tmpParemeters
-    );
-    let Routes = this.routesmanager.searchRoutes(
-      _tmpParemeters
-    );
+    this.routesmanager.setparameters(_tmpParemeters);
+    let Routes = this.routesmanager.searchRoutes(_tmpParemeters);
 
-       this.router.navigate(['results']);
+    this.router.navigate(['results']);
   }
   ngOnDestroy() {
-     this.unsubscribe$.next();
-     this.unsubscribe$.complete();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   DateValidator(): ValidatorFn {
