@@ -21,7 +21,7 @@ export class GetDestinationService {
   getDestinazioni():Observable<destinazione[]>  {
     // return this.destinazioni;
     let _jsonURL = 'assets/Json/destinazioni/destinazioni.json';
-    return this.http.getListWithUrl(_jsonURL);
+    return this.http.getListWithUrl<destinazione>(_jsonURL);
   }
 
 }

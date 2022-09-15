@@ -10,7 +10,7 @@ import { environment } from 'environments/environment';
 })
 export class HttpclientService {
   constructor(private _httpClient: HttpClient) {}
-
+   
   // HttpClient API get() method => Fetch details
   get<T>(url: string) {
     return this._httpClient
